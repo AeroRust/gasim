@@ -51,6 +51,11 @@ fn some_false_default() -> Option<bool> {
     Some(false)
 }
 
+/// A position(x,y,z) and orientation(roll, pitch yaw) with respect to the frame named in the relative_to attribute.
+/// Default: 0 0 0 0 -0 0
+/// TODO: Create `Pose`
+pub type Pose = String;
+
 /// The model element defines a complete robot or any other physical object.
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename = "model", rename_all = "snake_case")]
@@ -185,6 +190,7 @@ pub struct GraspCheck {
 pub struct Actor {}
 /// The light element describes a light source
 #[derive(Debug, Serialize, Deserialize)]
+<<<<<<< HEAD
 pub struct Light {
     // A unique name for the light
     name: String,
@@ -232,16 +238,17 @@ pub struct Spot {
     falloff: f64,
 }
 
-/// A position(x,y,z) and orientation(roll, pitch yaw) with respect to the frame named in the relative_to attribute.
-/// Default: 0 0 0 0 -0 0
-#[derive(Debug, Deserialize, Serialize)]
-#[serde(rename = "pose", rename_all = "snake_case")]
+// A position and orientation with respect to the frame named in relative_to attribute
 pub struct Pose {
     relative_to: Option<String>,
 }
 
 // Unit struct for tpe `color`
 struct Color(u8, u8, u8);
+=======
+#[serde(rename = "light", rename_all = "snake_case")]
+pub struct Light {}
+>>>>>>> main
 
 #[cfg(test)]
 mod test {
