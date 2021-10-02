@@ -182,7 +182,60 @@ pub struct GraspCheck {
 pub struct Actor {}
 /// The light element describes a light sou
 #[derive(Debug, Serialize, Deserialize)]
-pub struct Light {}
+pub struct Light {
+    // A unique name for the light
+    name: String,
+    // The light type: point, directional spot
+    #[serde(default)]
+    light_type: String,
+    // When true, the light will cast shadows
+    #[serde(default)]
+    cast_shadows: Option<bool>,
+    // Scale factor to set the relative power of a light
+    #[serde(default)]
+    intensity: Option<f64>,
+    // Diffuse light color
+    #[serde(default)]
+    diffuse: Option<Color>,
+    // Specular light color
+    #[serde(default)]
+    specular: Option<Color>,
+    // Light attenuation
+    #[serde(default)]
+    attenuation: Vec<Attenuation>,
+    // Direction of light, only applicable for spot and directional light
+    #[serde(default)]
+    direction: Vec<i32>,
+    // Spot light parameters
+    #[serde(default)]
+    spot: Vec<Spot>,
+    // A position and orientation with respect to the frame named in relative_to attribute
+    #[serde(default)]
+    pose: Vec<Pose>,
+}
+
+// Light attenuation
+pub struct Attenuation {
+    range: f64,
+    linear: Option<f64>,
+    constant: Option<f64>,
+    quadratic: Option<f64>,
+}
+
+// Spot light parameters
+pub struct Spot {
+    inner_angle: f64,
+    outer_angle: f64,
+    falloff: f64,
+}
+
+// A position and orientation with respect to the frame named in relative_to attribute
+pub struct Pose {
+    relative_to: Option<String>,
+}
+
+// Unit struct for tpe `color`
+struct Color(u8, u8, u8);
 
 #[cfg(test)]
 mod test {
